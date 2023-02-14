@@ -1,0 +1,26 @@
+{% extends 'reese_blog/base.html' %}
+<!--Going to add crispy for better styling -->
+{% load crispy_forms_tags %}
+<!--Going to add crispy for better styling -->
+
+<!--You need to use {} for your code-->
+<!--For Loop-->
+{% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Blog Post</legend>
+            <!-- crispy form-->
+            {{ form|crispy }}
+            <!-- crispy form-->
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Post!</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+<!--For Loop-->
+
+
