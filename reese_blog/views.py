@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         UserPassesTestMixin)
+from django.contrib.auth.models import User
 from django.views.generic import (ListView,
                                   DetailView,
                                   CreateView,
@@ -42,7 +43,24 @@ class PostListView(ListView):
     context_object_name = 'posts'
     # This will change the newest post to the top!
     ordering = ['-date_posted']
+    paginate_by = 3
 
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'reese_blog/user_posts.html'
+    context_object_name = 'posts'
+    # This will change the newest post to the top!
+    paginate_by = 3
+
+    def get_queryset(self):
+
+        # throw 404 message if it doesn't exist
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+
+
+        # 2:34PM Work on Email next
 
 # Make a class-base views
 class PostDetailView(DetailView):

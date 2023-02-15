@@ -2,6 +2,7 @@
 <!--You need to use {} for your code-->
 <!--For Loop-->
 {% block content %}
+    <h1 class="mb-3">Posts by {{view.kwargs.username}} ({{ page_obj.paginator.count }})</h1>
 {% for post in posts %}
 <!--you need DOUBLE {} to access the var -->
 <article class="media content-section">
